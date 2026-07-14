@@ -28,13 +28,13 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gray-50 dark:bg-slate-950">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
             Trusted by teams like yours
           </h2>
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-gray-600 dark:text-slate-300">
             See what our customers have to say about working with PowerIntl.
           </p>
         </div>
@@ -43,16 +43,16 @@ export default function TestimonialsSection() {
           {testimonials.map((testimonial) => (
             <Card key={testimonial.name} className="h-full">
               <CardContent className="p-6 flex flex-col h-full">
-                <Quote className="h-8 w-8 text-blue-200" />
-                <p className="mt-4 text-gray-700 flex-1">{testimonial.quote}</p>
+                <Quote className="h-8 w-8 text-blue-200 dark:text-blue-900" />
+                <p className="mt-4 text-gray-700 dark:text-slate-200 flex-1">{testimonial.quote}</p>
                 <div className="mt-6 flex items-center gap-1 text-amber-400">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-current" />
                   ))}
                 </div>
                 <div className="mt-4">
-                  <p className="font-semibold text-gray-900">{testimonial.name}</p>
-                  <p className="text-sm text-gray-500">{testimonial.role}</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">{testimonial.name}</p>
+                  <p className="text-sm text-gray-500 dark:text-slate-400">{testimonial.role}</p>
                 </div>
               </CardContent>
             </Card>

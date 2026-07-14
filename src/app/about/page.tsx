@@ -56,22 +56,22 @@ export default function AboutPage() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <section className="pt-32 pb-20 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-950 dark:to-indigo-950">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             About{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
               Power International
             </span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-slate-300 max-w-2xl mx-auto">
             Building the future of business management with innovative ERP solutions
           </p>
         </div>
       </section>
 
       {/* Mission Vision */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8">
             {values.map((item, index) => {
@@ -83,7 +83,7 @@ export default function AboutPage() {
                       <Icon className="h-8 w-8 text-white" />
                     </div>
                     <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-gray-600">{item.description}</p>
+                    <p className="text-gray-600 dark:text-slate-300">{item.description}</p>
                   </CardContent>
                 </Card>
               );
@@ -117,10 +117,10 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-slate-950">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Meet Our <span className="text-blue-600">Team</span>
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+            Meet Our <span className="text-blue-600 dark:text-blue-400">Team</span>
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, index) => (
@@ -130,8 +130,8 @@ export default function AboutPage() {
                     {member.avatar}
                   </div>
                   <h3 className="text-lg font-bold">{member.name}</h3>
-                  <p className="text-blue-600 text-sm font-medium">{member.role}</p>
-                  <p className="text-gray-600 text-sm mt-2">{member.description}</p>
+                  <p className="text-blue-600 dark:text-blue-400 text-sm font-medium">{member.role}</p>
+                  <p className="text-gray-600 dark:text-slate-300 text-sm mt-2">{member.description}</p>
                 </CardContent>
               </Card>
             ))}

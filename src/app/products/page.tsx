@@ -127,19 +127,19 @@ export default function ProductsPage() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-32 pb-12 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <section className="pt-32 pb-12 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-950 dark:to-indigo-950">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">
-            Our <span className="text-blue-600">Products</span>
+          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+            Our <span className="text-blue-600 dark:text-blue-400">Products</span>
           </h1>
-          <p className="text-lg text-gray-600 text-center max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-slate-300 text-center max-w-2xl mx-auto">
             Quality products designed for your business needs
           </p>
         </div>
       </section>
 
       {/* Search & Filter */}
-      <section className="py-8 bg-white border-b">
+      <section className="py-8 bg-white dark:bg-slate-900 border-b dark:border-slate-800">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-4 items-center">
             <div className="relative flex-1 w-full">
@@ -185,43 +185,43 @@ export default function ProductsPage() {
       </section>
 
       {/* Products Grid */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-gray-50 dark:bg-slate-950">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product) => (
                 <Card key={product.id} className="group hover:shadow-xl transition-all duration-300">
-                  <div className="relative h-48 bg-gray-100 rounded-t-lg overflow-hidden">
+                  <div className="relative h-48 bg-gray-100 dark:bg-slate-800 rounded-t-lg overflow-hidden">
                     <div className="absolute top-3 right-3 z-10">
                       <Badge className="bg-blue-600 text-white hover:bg-blue-700">
                         {product.badge}
                       </Badge>
                     </div>
-                    <div className="w-full h-full flex items-center justify-center text-6xl text-gray-300">
+                    <div className="w-full h-full flex items-center justify-center text-6xl text-gray-300 dark:text-slate-600">
                       🔋
                     </div>
                   </div>
                   <CardHeader>
                     <CardTitle className="text-lg">{product.name}</CardTitle>
-                    <p className="text-sm text-gray-500">{product.category}</p>
+                    <p className="text-sm text-gray-500 dark:text-slate-400">{product.category}</p>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-3">
+                    <p className="text-sm text-gray-600 dark:text-slate-300 line-clamp-2 mb-3">
                       {product.description}
                     </p>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1">
                         <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                         <span className="text-sm font-medium">{product.rating}</span>
-                        <span className="text-sm text-gray-400">({product.reviews})</span>
+                        <span className="text-sm text-gray-400 dark:text-slate-500">({product.reviews})</span>
                       </div>
-                      <span className="text-xl font-bold text-blue-600">
+                      <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
                         {product.price}
                       </span>
                     </div>
                   </CardContent>
                   <CardFooter className="flex gap-2">
-                    <Button className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
+                    <Button className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white">
                       <ShoppingCart className="mr-2 h-4 w-4" />
                       Add to Quote
                     </Button>
@@ -230,7 +230,7 @@ export default function ProductsPage() {
               ))
             ) : (
               <div className="col-span-full text-center py-12">
-                <p className="text-gray-500 text-lg">No products found matching your criteria</p>
+                <p className="text-gray-500 dark:text-slate-400 text-lg">No products found matching your criteria</p>
               </div>
             )}
           </div>

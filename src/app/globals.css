@@ -5,8 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  color-scheme: dark;
-  font-family: Arial, Helvetica, sans-serif;
+  color-scheme: light;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -43,16 +42,6 @@
 
 * {
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: #020617;
-  color: #f8fafc;
-}
-
-a {
-  color: inherit;
 }
 
 @theme inline {
@@ -99,6 +88,7 @@ a {
 }
 
 .dark {
+  color-scheme: dark;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
@@ -138,8 +128,12 @@ a {
   }
   body {
     @apply bg-background text-foreground;
+    margin: 0;
   }
   html {
     @apply font-sans;
+  }
+  a {
+    color: inherit;
   }
 }

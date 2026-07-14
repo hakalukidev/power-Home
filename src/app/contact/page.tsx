@@ -73,19 +73,19 @@ export default function ContactPage() {
       <Navbar />
       
       {/* Hero */}
-      <section className="pt-32 pb-12 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <section className="pt-32 pb-12 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-950 dark:to-indigo-950">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Contact <span className="text-blue-600">Us</span>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
+            Contact <span className="text-blue-600 dark:text-blue-400">Us</span>
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-slate-300 max-w-2xl mx-auto">
             Have questions or need support? Reach out to us anytime.
           </p>
         </div>
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-5 gap-8">
             {/* Contact Info */}
@@ -99,9 +99,9 @@ export default function ContactPage() {
                         <Icon className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900">{item.title}</h3>
+                        <h3 className="font-semibold text-gray-900 dark:text-white">{item.title}</h3>
                         {item.details.map((line) => (
-                          <p key={line} className="text-gray-600">{line}</p>
+                          <p key={line} className="text-gray-600 dark:text-slate-300">{line}</p>
                         ))}
                       </div>
                     </CardContent>
@@ -111,7 +111,7 @@ export default function ContactPage() {
 
               {/* Map */}
               <Card className="overflow-hidden">
-                <div className="h-48 bg-gray-200 flex items-center justify-center text-gray-400">
+                <div className="h-48 bg-gray-200 dark:bg-slate-800 flex items-center justify-center text-gray-400 dark:text-slate-500">
                   <MapPin className="h-12 w-12" />
                   <span className="ml-2">Google Maps</span>
                 </div>
@@ -122,20 +122,20 @@ export default function ContactPage() {
             <div className="lg:col-span-3">
               <Card className="shadow-lg">
                 <CardContent className="p-6 md:p-8">
-                  <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+                  <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Send Us a Message</h2>
 
                   {isSubmitted ? (
                     <div className="text-center py-12">
                       <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <CheckCircle className="h-8 w-8 text-green-600" />
                       </div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
-                      <p className="text-gray-600">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Message Sent!</h3>
+                      <p className="text-gray-600 dark:text-slate-300">
                         Thank you for contacting us. We&apos;ll get back to you soon.
                       </p>
                       <Button
                         onClick={() => setIsSubmitted(false)}
-                        className="mt-4 bg-gradient-to-r from-blue-600 to-indigo-600"
+                        className="mt-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white"
                       >
                         Send Another Message
                       </Button>
@@ -144,7 +144,7 @@ export default function ContactPage() {
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
                             Full Name *
                           </label>
                           <Input
@@ -155,7 +155,7 @@ export default function ContactPage() {
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
                             Email Address *
                           </label>
                           <Input
@@ -169,7 +169,7 @@ export default function ContactPage() {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
                           Phone Number
                         </label>
                         <Input
@@ -181,7 +181,7 @@ export default function ContactPage() {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
                           Subject *
                         </label>
                         <Input
@@ -193,7 +193,7 @@ export default function ContactPage() {
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1">
                           Message *
                         </label>
                         <Textarea
@@ -208,7 +208,7 @@ export default function ContactPage() {
                       <Button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white"
                         size="lg"
                       >
                         {isLoading ? (

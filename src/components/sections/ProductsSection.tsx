@@ -66,13 +66,13 @@ const products = [
 
 export default function ProductsSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-slate-900">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Our <span className="text-blue-600">Products</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            Our <span className="text-blue-600 dark:text-blue-400">Products</span>
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-slate-300">
             Quality products designed for your business needs
           </p>
         </div>
@@ -80,7 +80,7 @@ export default function ProductsSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
             <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="relative h-48 bg-gray-100">
+              <div className="relative h-48 bg-gray-100 dark:bg-slate-800">
                 <div className="absolute top-3 right-3 z-10">
                   <Badge className="bg-blue-600 text-white hover:bg-blue-700">
                     {product.badge}
@@ -100,11 +100,11 @@ export default function ProductsSection() {
                     <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     <span className="text-sm font-medium">{product.rating}</span>
                   </div>
-                  <span className="text-xl font-bold text-blue-600">{product.price}</span>
+                  <span className="text-xl font-bold text-blue-600 dark:text-blue-400">{product.price}</span>
                 </div>
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white">
                   <ShoppingCart className="mr-2 h-4 w-4" />
                   Add to Quote
                 </Button>
@@ -114,7 +114,7 @@ export default function ProductsSection() {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="border-2">
+          <Button variant="outline" size="lg" className="border-2 dark:border-slate-600 dark:text-white">
             View All Products
           </Button>
         </div>

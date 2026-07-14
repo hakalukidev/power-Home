@@ -53,16 +53,16 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="py-20 bg-gray-50">
+    <section id="features" className="py-20 bg-gray-50 dark:bg-slate-950">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Why Choose{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
               Power International?
             </span>
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-slate-300">
             Complete solution for modern businesses with enterprise-grade features
           </p>
         </div>
@@ -71,8 +71,8 @@ export default function FeaturesSection() {
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg"
               >
                 <CardHeader>
@@ -80,9 +80,7 @@ export default function FeaturesSection() {
                     <Icon className="h-6 w-6 text-white" />
                   </div>
                   <CardTitle className="text-xl">{feature.title}</CardTitle>
-                  <CardDescription className="text-gray-600">
-                    {feature.description}
-                  </CardDescription>
+                  <CardDescription>{feature.description}</CardDescription>
                 </CardHeader>
               </Card>
             );
