@@ -1,10 +1,4 @@
-export type LandingContent = {
-  heroTitle: string;
-  heroSubtitle: string;
-  products: Array<{ title: string; description: string }>;
-  aboutText: string;
-  contactEmail: string;
-};
+import type { LandingContent } from '@/types/landing';
 
 export function getLandingContent(): LandingContent {
   return {
@@ -27,5 +21,7 @@ export function getLandingContent(): LandingContent {
     aboutText:
       "Power Home brings together thoughtful design, practical technology, and a customer-first approach to create spaces people love.",
     contactEmail: "powerinternationalbd109@gmail.com",
+    contactPhone: "+880 1309 831 316",
+    contactAddress: "Office: Sadar, Chuadanga · Depot 1: Monihar, Jashore · Depot 2: Isshordi, Pabna",
   };
 }
