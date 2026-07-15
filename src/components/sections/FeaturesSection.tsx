@@ -2,90 +2,100 @@
 
 'use client';
 
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  ShoppingCart,
-  Users,
-  Wallet,
+  ShieldCheck,
+  Zap,
   Truck,
-  BarChart3,
-  ShieldCheck
+  Gauge,
+  Recycle,
+  Award
 } from 'lucide-react';
+import { motion } from 'motion/react';
+import { TextReveal } from '@/components/ui/text-reveal';
+
+const listVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
+};
 
 const features = [
   {
-    icon: ShoppingCart,
-    title: 'Sales Management',
-    description: 'Complete sales chain from lead to delivery with real-time tracking.',
-    color: 'from-blue-500 to-blue-600',
+    icon: ShieldCheck,
+    title: 'Certified Quality',
+    description: 'Rigorous quality checks and reinforced plate design on every battery we manufacture.',
   },
   {
-    icon: Wallet,
-    title: 'Financial Control',
-    description: 'Full accounting, ledger, payments, and expense management.',
-    color: 'from-green-500 to-emerald-600',
+    icon: Zap,
+    title: 'Fast Recharge',
+    description: 'Optimized cell design for quicker charging and longer, more stable runtime.',
   },
   {
     icon: Truck,
-    title: 'Distribution & Logistics',
-    description: 'Warehouse management, delivery assignment, and tracking.',
-    color: 'from-orange-500 to-amber-600',
+    title: 'Nationwide Delivery',
+    description: 'Depots in Chuadanga, Jashore and Pabna keep delivery fast and reliable.',
   },
   {
-    icon: Users,
-    title: 'HR & Payroll',
-    description: 'Employee management, attendance, payroll, and commissions.',
-    color: 'from-purple-500 to-violet-600',
+    icon: Gauge,
+    title: 'High Mileage',
+    description: 'Engineered for consistent power output across thousands of rides.',
   },
   {
-    icon: BarChart3,
-    title: 'Analytics & Reports',
-    description: 'Real-time dashboards, daily closing, and business insights.',
-    color: 'from-red-500 to-rose-600',
+    icon: Recycle,
+    title: 'Eco-Friendly',
+    description: 'Recyclable materials and a responsible battery disposal programme.',
   },
   {
-    icon: ShieldCheck,
-    title: 'Secure & Reliable',
-    description: 'Role-based access, audit trails, and data protection.',
-    color: 'from-indigo-500 to-blue-600',
+    icon: Award,
+    title: 'Trusted Manufacturer',
+    description: 'A growing, trusted name in Bangladesh’s battery manufacturing industry.',
   },
 ];
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="py-20 bg-gray-50 dark:bg-slate-950">
+    <section id="features" className="bg-brand-cream-50 py-10">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Why Choose{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
-              Power International?
-            </span>
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-slate-300">
-            Complete solution for modern businesses with enterprise-grade features
-          </p>
-        </div>
+        <TextReveal className="mx-auto mb-10 max-w-3xl">
+          Why Choose Power International BD? Quality batteries backed by real service, from manufacturing to delivery.
+        </TextReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          variants={listVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="mx-auto grid max-w-5xl divide-y divide-brand-navy-950/10 border-t border-brand-navy-950/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0"
+        >
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <Card
+              <motion.div
                 key={index}
-                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg"
+                variants={itemVariants}
+                className="flex items-start gap-4 border-b border-brand-navy-950/10 px-2 py-8 sm:border-b-0 sm:px-8"
               >
-                <CardHeader>
-                  <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                    <Icon className="h-6 w-6 text-white" />
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                  <CardDescription>{feature.description}</CardDescription>
-                </CardHeader>
-              </Card>
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-brand-orange-500/30 text-brand-orange-500">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 className="text-lg font-bold text-brand-navy-950">{feature.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-brand-navy-900/70">
+                    {feature.description}
+                  </p>
+                </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

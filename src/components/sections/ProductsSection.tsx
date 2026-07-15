@@ -2,119 +2,114 @@
 
 'use client';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { ShoppingCart, Star } from 'lucide-react';
+import { ShieldCheck, BadgeCheck, ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { TextReveal } from '@/components/ui/text-reveal';
+import { ProductImageReveal } from './ProductImageReveal';
 
 const products = [
   {
     id: 1,
-    name: 'Industrial Battery',
-    description: 'High-capacity battery for industrial applications',
-    price: '15,000 BDT',
-    image: '/images/battery.jpg',
-    rating: 4.8,
+    name: 'AK Power Plus',
+    specs: '6-EV-12V · Deep Cycle AGM',
+    description:
+      'Heavy-duty deep-cycle battery engineered for easy bikes and backup power, with reinforced plates for a longer, more consistent discharge cycle.',
+    price: 'Starting from ৳ 8,500',
+    guarantee: '12 Months Replacement Guarantee',
+    image: '/products/p1.jpeg',
     badge: 'Best Seller',
   },
   {
     id: 2,
-    name: 'Solar Inverter',
-    description: 'Premium solar inverter with smart technology',
-    price: '25,000 BDT',
-    image: '/images/inverter.jpg',
-    rating: 4.9,
-    badge: 'New',
-  },
-  {
-    id: 3,
-    name: 'Power Distribution Board',
-    description: 'Complete power distribution solution',
-    price: '45,000 BDT',
-    image: '/images/distribution.jpg',
-    rating: 4.7,
-    badge: 'Popular',
-  },
-  {
-    id: 4,
-    name: 'Voltage Stabilizer',
-    description: 'Automatic voltage regulation system',
-    price: '8,500 BDT',
-    image: '/images/stabilizer.jpg',
-    rating: 4.6,
-    badge: 'Budget',
-  },
-  {
-    id: 5,
-    name: 'Smart Meter',
-    description: 'Digital energy monitoring solution',
-    price: '5,200 BDT',
-    image: '/images/meter.jpg',
-    rating: 4.5,
-    badge: 'Smart',
-  },
-  {
-    id: 6,
-    name: 'UPS System',
-    description: 'Uninterrupted power supply for critical equipment',
-    price: '12,000 BDT',
-    image: '/images/ups.jpg',
-    rating: 4.8,
-    badge: 'Premium',
+    name: 'Mileage King',
+    specs: 'Model 21S AH · 6-EV-12V · Easy Bike Battery',
+    description:
+      'High-mileage easy-bike battery built for long rides, fast recharge, and dependable power delivery mile after mile.',
+    price: 'Starting from ৳ 9,900',
+    guarantee: '18 Months Warranty',
+    image: '/products/p2.jpeg',
+    badge: 'Top Rated',
   },
 ];
 
 export default function ProductsSection() {
   return (
-    <section className="py-20 bg-white dark:bg-slate-900">
+    <section id="products" className="bg-white py-10">
       <div className="container mx-auto px-4">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Our <span className="text-blue-600 dark:text-blue-400">Products</span>
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-slate-300">
-            Quality products designed for your business needs
-          </p>
-        </div>
+        <TextReveal className="mx-auto mb-10 max-w-3xl">
+          Batteries Built for the Long Ride. Scroll down to reveal each product — genuine Power International BD batteries, manufactured for reliability.
+        </TextReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product) => (
-            <Card key={product.id} className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="relative h-48 bg-gray-100 dark:bg-slate-800">
-                <div className="absolute top-3 right-3 z-10">
-                  <Badge className="bg-blue-600 text-white hover:bg-blue-700">
-                    {product.badge}
-                  </Badge>
+        <div className="flex flex-col gap-16">
+          {products.map((product, index) => {
+            const imageFirst = index % 2 === 0;
+            return (
+              <div
+                key={product.id}
+                className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
+              >
+                <div
+                  className={cn(
+                    'flex justify-center',
+                    imageFirst ? 'lg:order-1' : 'lg:order-2'
+                  )}
+                >
+                  <div className="relative">
+                    <span className="absolute -top-3 -left-3 z-10 rounded-full bg-brand-orange-500 px-3 py-1 text-xs font-bold text-white shadow-lg">
+                      {product.badge}
+                    </span>
+                    <ProductImageReveal src={product.image} alt={product.name} />
+                  </div>
                 </div>
-                <div className="w-full h-full flex items-center justify-center text-gray-400">
-                  <span className="text-6xl">🔋</span>
+
+                <div className={cn(imageFirst ? 'lg:order-2' : 'lg:order-1')}>
+                  <p className="text-sm font-semibold tracking-wide text-brand-orange-500 uppercase">
+                    {product.specs}
+                  </p>
+                  <h3 className="mt-2 text-2xl font-extrabold text-brand-navy-950 sm:text-3xl">
+                    {product.name}
+                  </h3>
+                  <p className="mt-4 max-w-lg leading-relaxed text-brand-navy-900/70">
+                    {product.description}
+                  </p>
+
+                  <div className="mt-6 flex flex-wrap items-center gap-6">
+                    <span className="text-2xl font-bold text-brand-navy-950">
+                      {product.price}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-navy-900/70">
+                      <ShieldCheck className="h-4 w-4 text-brand-orange-500" />
+                      {product.guarantee}
+                    </span>
+                  </div>
+
+                  <div className="mt-3 inline-flex items-center gap-1.5 text-xs text-brand-navy-900/50">
+                    <BadgeCheck className="h-3.5 w-3.5" />
+                    Indicative pricing &mdash; contact us for the current rate.
+                  </div>
+
+                  <div className="mt-8">
+                    <Button
+                      size="lg"
+                      className="rounded-full bg-brand-navy-950 px-6 text-white hover:bg-brand-navy-800"
+                    >
+                      Inquire Now
+                      <ArrowRight className="ml-1 h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
-              <CardHeader>
-                <CardTitle className="text-xl">{product.name}</CardTitle>
-                <CardDescription>{product.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    <span className="text-sm font-medium">{product.rating}</span>
-                  </div>
-                  <span className="text-xl font-bold text-blue-600 dark:text-blue-400">{product.price}</span>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white">
-                  <ShoppingCart className="mr-2 h-4 w-4" />
-                  Add to Quote
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+            );
+          })}
         </div>
 
-        <div className="text-center mt-12">
-          <Button variant="outline" size="lg" className="border-2 dark:border-slate-600 dark:text-white">
+        <div className="mt-16 text-center">
+          <Button
+            variant="outline"
+            size="lg"
+            className="rounded-full border-2 border-brand-navy-950 px-6 text-brand-navy-950 hover:bg-brand-navy-950 hover:text-white"
+          >
             View All Products
           </Button>
         </div>

@@ -2,122 +2,92 @@
 
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, Zap, Shield } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { ArrowRight, ArrowDown } from 'lucide-react';
+import { TypingAnimation } from '@/components/ui/typing-animation';
+import { SocialDock } from '@/components/shared/SocialDock';
 
 export default function HeroSection() {
-  return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-16">
-      {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950" />
+  const scrollTo = (href: string) => {
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200 dark:bg-blue-900 rounded-full opacity-20 blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-200 dark:bg-indigo-900 rounded-full opacity-20 blur-3xl animate-pulse delay-1000" />
+  return (
+    <section id="home" className="relative overflow-hidden bg-brand-cream-50 pt-28 pb-10 lg:pt-32">
+      {/* Background texture */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-brand-orange-500/10 blur-3xl" />
+        <div className="absolute -bottom-20 left-0 h-96 w-96 rounded-full bg-brand-navy-800/10 blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-6">
+          {/* Left content */}
           <div>
-            <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-950 dark:text-blue-300 dark:hover:bg-blue-900 border-0 px-4 py-1">
-              🚀 Enterprise Solution
-            </Badge>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
-              Power International
-              <br />
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
-                ERP & Distribution
-              </span>
+            <h1 className="text-4xl leading-[1.05] font-extrabold tracking-tight text-brand-navy-950 uppercase sm:text-5xl lg:text-6xl">
+              <TypingAnimation as="span" className="block" duration={55} delay={200} showCursor={false}>
+                Engineering
+              </TypingAnimation>
+              <TypingAnimation as="span" className="block" duration={55} delay={950} showCursor={false}>
+                Batteries That
+              </TypingAnimation>
+              <TypingAnimation
+                as="span"
+                className="block text-brand-orange-500"
+                duration={55}
+                delay={1900}
+                showCursor={false}
+              >
+                Keep You Moving
+              </TypingAnimation>
             </h1>
 
-            <p className="mt-6 text-lg text-gray-600 dark:text-slate-300 max-w-lg leading-relaxed">
-              Complete enterprise resource planning and distribution management
-              system for modern businesses. Streamline your operations with
-              real-time insights and automation.
+            <p className="mt-6 max-w-md text-base leading-relaxed text-brand-navy-900/70">
+              Power International BD supplies deep-cycle and easy-bike
+              batteries built for long mileage, fast recharge, and dependable
+              backup power &mdash; trusted across Chuadanga, Jashore and Pabna.
             </p>
 
-            {/* Features List */}
-            <div className="mt-8 space-y-3">
-              <div className="flex items-center gap-3 text-gray-700 dark:text-slate-200">
-                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                <span>Real-time inventory management</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-700 dark:text-slate-200">
-                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                <span>Automated financial reporting</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-700 dark:text-slate-200">
-                <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                <span>Complete sales & distribution chain</span>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link href="https://erp.powerinternational.com">
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all">
-                  Get Started
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href="/products">
-                <Button size="lg" variant="outline" className="border-2 dark:border-slate-600 dark:text-white">
-                  Learn More
-                </Button>
-              </Link>
-            </div>
-
-            {/* Stats */}
-            <div className="mt-12 grid grid-cols-3 gap-8">
-              <div>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">500+</p>
-                <p className="text-sm text-gray-500 dark:text-slate-400">Active Customers</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">50+</p>
-                <p className="text-sm text-gray-500 dark:text-slate-400">Team Members</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">99.9%</p>
-                <p className="text-sm text-gray-500 dark:text-slate-400">Uptime</p>
-              </div>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button
+                size="lg"
+                onClick={() => scrollTo('#products')}
+                className="h-11 rounded-full bg-brand-orange-500 px-6 text-white hover:bg-brand-orange-600"
+              >
+                Get Started
+                <ArrowRight className="ml-1 h-4 w-4" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => scrollTo('#contact')}
+                className="h-11 rounded-full border-2 border-brand-navy-950 px-6 text-brand-navy-950 hover:bg-brand-navy-950 hover:text-white"
+              >
+                Contact Us
+              </Button>
             </div>
           </div>
 
-          {/* Right Image */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          {/* Right: hero image + dock underneath */}
+          <div className="flex flex-col items-center gap-6">
+            <div className="relative flex w-full items-center justify-center  p-8  sm:p-12">
               <Image
-                src="/images/hero-dashboard.png"
-                alt="ERP Dashboard Preview"
-                width={600}
-                height={400}
-                className="w-full h-auto"
+                src="/hero.png"
+                alt="Power International BD battery"
+                width={480}
+                height={480}
                 priority
+                className="h-auto w-full max-w-sm"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
-
-            {/* Floating Badges */}
-            <div className="absolute -top-4 -right-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg p-3 animate-bounce">
-              <div className="flex items-center gap-2">
-                <Zap className="h-5 w-5 text-yellow-500" />
-                <span className="text-sm font-semibold dark:text-white">Fast & Efficient</span>
-              </div>
-            </div>
-            <div className="absolute -bottom-4 -left-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg p-3 animate-bounce delay-1000">
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-green-500" />
-                <span className="text-sm font-semibold dark:text-white">Secure</span>
-              </div>
-            </div>
+            <SocialDock />
           </div>
+        </div>
+
+        <div className="mt-14 flex items-center justify-center gap-2 text-xs font-medium text-brand-navy-900/60">
+          <ArrowDown className="h-3.5 w-3.5 animate-bounce" />
+          Scroll to explore our products
         </div>
       </div>
     </section>
