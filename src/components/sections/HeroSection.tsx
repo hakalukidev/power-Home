@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import { TypingAnimation } from '@/components/ui/typing-animation';
-import { SocialDock } from '@/components/shared/SocialDock';
 
 export default function HeroSection() {
   const scrollTo = (href: string) => {
@@ -69,19 +68,16 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right: hero image + dock underneath */}
-          <div className="flex flex-col items-center gap-6">
-            <div className="relative flex w-full items-center justify-center  p-8  sm:p-12">
-              <Image
-                src="/hero.png"
-                alt="Power International BD battery"
-                width={480}
-                height={480}
-                priority
-                className="h-auto w-full max-w-sm"
-              />
-            </div>
-            <SocialDock />
+          {/* Right: hero image */}
+          <div className="relative flex w-full items-center justify-center p-8 sm:p-12">
+            <Image
+              src="/hero.png"
+              alt="Power International BD battery"
+              width={480}
+              height={480}
+              priority
+              className="h-auto w-full max-w-sm"
+            />
           </div>
         </div>
 

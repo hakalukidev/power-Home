@@ -15,7 +15,7 @@ function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} {...props}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} {...props}>
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
@@ -43,19 +43,19 @@ const socials = [
   { name: 'Facebook', href: 'https://facebook.com', Icon: FacebookIcon, color: 'text-[#1877F2]' },
   { name: 'Instagram', href: 'https://instagram.com', Icon: InstagramIcon, color: 'text-brand-orange-500' },
   { name: 'WhatsApp', href: 'https://wa.me/8801309831316', Icon: WhatsAppIcon, color: 'text-[#25D366]' },
-  { name: 'X', href: 'https://x.com', Icon: XIcon, color: 'text-foreground' },
+  { name: 'X', href: 'https://x.com', Icon: XIcon, color: 'text-brand-navy-950' },
 ];
 
 export function SocialDock({ className }: { className?: string }) {
   return (
     <Dock
       className={cn(
-        'mt-0 border-black/10 bg-white/70 shadow-lg shadow-black/5',
+        'fixed right-4 bottom-4 z-50 mt-0 h-[76px] border-black/10 bg-white/70 shadow-lg shadow-black/5 sm:right-6 sm:bottom-6',
         className
       )}
-      iconSize={40}
-      iconMagnification={56}
-      iconDistance={100}
+      iconSize={52}
+      iconMagnification={72}
+      iconDistance={120}
     >
       {socials.map(({ name, href, Icon, color }) => (
         <DockIcon key={name} className="bg-brand-cream-50">
@@ -66,7 +66,7 @@ export function SocialDock({ className }: { className?: string }) {
             aria-label={name}
             className="flex h-full w-full items-center justify-center"
           >
-            <Icon className={cn('h-1/2 w-1/2', color)} />
+            <Icon className={cn('h-3/5 w-3/5', color)} />
           </a>
         </DockIcon>
       ))}

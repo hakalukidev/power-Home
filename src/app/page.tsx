@@ -3,6 +3,8 @@
 'use client';
 
 import Navbar from '@/components/sections/Navbar';
+import { SocialDock } from '@/components/shared/SocialDock';
+import { CustomCursor } from '@/components/shared/CustomCursor';
 import HeroSection from '@/components/sections/HeroSection';
 import FeaturesSection from '@/components/sections/FeaturesSection';
 import StatsSection from '@/components/sections/StatsSection';
@@ -26,6 +28,8 @@ export default function HomePage() {
       <CTASection />
       <ContactSection />
       <Footer />
+      <SocialDock />
+      <CustomCursor />
     </main>
   );
 }
