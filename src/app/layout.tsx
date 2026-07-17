@@ -22,6 +22,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn("font-sans scroll-smooth", geist.variable)}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <body className={inter.className}>

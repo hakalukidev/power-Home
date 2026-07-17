@@ -8,6 +8,7 @@ import { useLandingContent } from '@/hooks/useLandingContent';
 import { uploadProductImage } from '@/lib/cloudinary/upload';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import type { LandingContent, LandingProduct } from '@/types/landing';
 
 export function ProductsEditor() {
@@ -18,7 +19,7 @@ export function ProductsEditor() {
       <h2 className="text-xl font-semibold">Products</h2>
       <p className="mt-2 text-sm text-slate-400">Manage featured products from the admin screen.</p>
 
-      {loading || !content ? (
+      {loading ? (
         <p className="mt-4 text-sm text-slate-500">Loading...</p>
       ) : (
         <ProductsEditorForm content={content} save={save} />
@@ -40,10 +41,23 @@ function ProductsEditorForm({
 
   const updateProduct = (index: number, patch: Partial<LandingProduct>) => {
     setProducts((prev) => prev.map((p, i) => (i === index ? { ...p, ...patch } : p)));
+    setStatus('idle');
   };
 
   const addProduct = () => {
-    setProducts((prev) => [...prev, { title: '', description: '' }]);
+    setProducts((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        name: '',
+        specs: '',
+        description: '',
+        price: '',
+        guarantee: '',
+        badge: '',
+        image: '',
+      },
+    ]);
   };
 
   const removeProduct = (index: number) => {
@@ -56,7 +70,7 @@ function ProductsEditorForm({
     setUploadingIndex(index);
     try {
       const url = await uploadProductImage(file);
-      updateProduct(index, { imageUrl: url });
+      updateProduct(index, { image: url });
     } finally {
       setUploadingIndex(null);
     }
@@ -71,23 +85,50 @@ function ProductsEditorForm({
   return (
     <div className="mt-4 space-y-4">
       {products.map((product, index) => (
-        <div key={index} className="space-y-2 rounded-lg border border-slate-800 p-3">
+        <div key={product.id} className="space-y-2 rounded-lg border border-slate-800 p-3">
           <Input
-            value={product.title}
-            onChange={(e) => updateProduct(index, { title: e.target.value })}
-            placeholder="Product title"
+            value={product.name}
+            onChange={(e) => updateProduct(index, { name: e.target.value })}
+            placeholder="Product name"
             className="bg-slate-900 text-slate-100"
           />
           <Input
+            value={product.specs}
+            onChange={(e) => updateProduct(index, { specs: e.target.value })}
+            placeholder="Specs (e.g. 6-EV-12V · Deep Cycle AGM)"
+            className="bg-slate-900 text-slate-100"
+          />
+          <Textarea
             value={product.description}
             onChange={(e) => updateProduct(index, { description: e.target.value })}
-            placeholder="Product description"
+            placeholder="Description"
+            rows={3}
             className="bg-slate-900 text-slate-100"
           />
-          {product.imageUrl && (
+          <div className="grid grid-cols-2 gap-2">
+            <Input
+              value={product.price}
+              onChange={(e) => updateProduct(index, { price: e.target.value })}
+              placeholder="Price (e.g. Starting from ৳ 8,500)"
+              className="bg-slate-900 text-slate-100"
+            />
+            <Input
+              value={product.badge}
+              onChange={(e) => updateProduct(index, { badge: e.target.value })}
+              placeholder="Badge (e.g. Best Seller)"
+              className="bg-slate-900 text-slate-100"
+            />
+          </div>
+          <Input
+            value={product.guarantee}
+            onChange={(e) => updateProduct(index, { guarantee: e.target.value })}
+            placeholder="Guarantee (e.g. 12 Months Replacement Guarantee)"
+            className="bg-slate-900 text-slate-100"
+          />
+          {product.image && (
             <Image
-              src={product.imageUrl}
-              alt={product.title || 'Product preview'}
+              src={product.image}
+              alt={product.name || 'Product preview'}
               width={160}
               height={100}
               className="rounded-md border border-slate-800 object-cover"
@@ -100,6 +141,7 @@ function ProductsEditorForm({
             disabled={uploadingIndex === index}
             className="block w-full text-sm text-slate-400 file:mr-4 file:rounded-md file:border-0 file:bg-slate-800 file:px-3 file:py-2 file:text-slate-100"
           />
+          {uploadingIndex === index && <p className="text-xs text-slate-500">Uploading...</p>}
           <Button variant="outline" size="sm" onClick={() => removeProduct(index)}>
             Remove
           </Button>

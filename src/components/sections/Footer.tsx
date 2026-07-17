@@ -4,12 +4,7 @@
 
 import Image from 'next/image';
 import { MapPin, Phone, Mail } from 'lucide-react';
-
-const officeLocations = [
-  { label: 'Office', value: 'Sadar, Chuadanga' },
-  { label: 'Depot 1', value: 'Monihar, Jashore' },
-  { label: 'Depot 2', value: 'Isshordi, Pabna' },
-];
+import { useLandingContent } from '@/hooks/useLandingContent';
 
 const quickLinks = [
   { name: 'Home', href: '#home' },
@@ -19,6 +14,15 @@ const quickLinks = [
 ];
 
 export default function Footer() {
+  const { content } = useLandingContent();
+  const officeLocations = (content.contactAddress ?? '')
+    .split('\n')
+    .filter(Boolean)
+    .map((line) => {
+      const [label, ...rest] = line.split(':');
+      return { label: label.trim(), value: rest.join(':').trim() };
+    });
+
   const scrollTo = (href: string) => {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -81,17 +85,22 @@ export default function Footer() {
                   ))}
                 </span>
               </li>
-              <li className="flex items-center gap-3 text-gray-400 text-sm">
-                <Phone className="h-5 w-5 text-brand-orange-400 shrink-0" />
-                <a href="tel:+8801309831316" className="hover:text-white transition-colors">
-                  +880 1309 831 316
-                </a>
-              </li>
+              {content.contactPhone && (
+                <li className="flex items-center gap-3 text-gray-400 text-sm">
+                  <Phone className="h-5 w-5 text-brand-orange-400 shrink-0" />
+                  <a
+                    href={`tel:${content.contactPhone.replace(/\s+/g, '')}`}
+                    className="hover:text-white transition-colors"
+                  >
+                    {content.contactPhone}
+                  </a>
+                </li>
+              )}
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <Mail className="h-5 w-5 text-brand-orange-400 shrink-0 mt-0.5" />
                 <span>
-                  <a href="mailto:powerinternationalbd109@gmail.com" className="block hover:text-white transition-colors">
-                    powerinternationalbd109@gmail.com
+                  <a href={`mailto:${content.contactEmail}`} className="block hover:text-white transition-colors">
+                    {content.contactEmail}
                   </a>
                   <a href="mailto:redwanahmad109@gmail.com" className="block hover:text-white transition-colors">
                     redwanahmad109@gmail.com

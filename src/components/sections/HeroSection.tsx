@@ -6,11 +6,28 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import { TypingAnimation } from '@/components/ui/typing-animation';
+import { useLandingContent } from '@/hooks/useLandingContent';
+
+const TYPE_DURATION = 55;
+const LINE_PAUSE = 200;
 
 export default function HeroSection() {
+  const { content } = useLandingContent();
   const scrollTo = (href: string) => {
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const titleLines = content.heroTitle.split('\n').filter(Boolean);
+  const lineDelays = titleLines.reduce<{ delays: number[]; next: number }>(
+    (acc, line) => ({
+      delays: [...acc.delays, acc.next],
+      next: acc.next + TYPE_DURATION * line.length + LINE_PAUSE,
+    }),
+    { delays: [], next: 200 }
+  ).delays;
+
+  const heroImage = content.heroImageUrl || '/hero.png';
+  const isDefaultHeroImage = heroImage === '/hero.png';
 
   return (
     <section id="home" className="relative overflow-hidden bg-brand-cream-50 pt-28 pb-10 lg:pt-32 dark:bg-brand-navy-950">
@@ -25,27 +42,22 @@ export default function HeroSection() {
           {/* Left content */}
           <div>
             <h1 className="text-4xl leading-[1.05] font-extrabold tracking-tight text-brand-navy-950 uppercase sm:text-5xl lg:text-6xl dark:text-white">
-              <TypingAnimation as="span" className="block" duration={55} delay={200} showCursor={false}>
-                Engineering
-              </TypingAnimation>
-              <TypingAnimation as="span" className="block" duration={55} delay={950} showCursor={false}>
-                Batteries That
-              </TypingAnimation>
-              <TypingAnimation
-                as="span"
-                className="block text-brand-orange-500"
-                duration={55}
-                delay={1900}
-                showCursor={false}
-              >
-                Keep You Moving
-              </TypingAnimation>
+              {titleLines.map((line, i) => (
+                <TypingAnimation
+                  key={`${i}-${line}`}
+                  as="span"
+                  className={i === titleLines.length - 1 ? 'block text-brand-orange-500' : 'block'}
+                  duration={TYPE_DURATION}
+                  delay={lineDelays[i]}
+                  showCursor={false}
+                >
+                  {line}
+                </TypingAnimation>
+              ))}
             </h1>
 
             <p className="mt-6 max-w-md text-base leading-relaxed text-brand-navy-900/70 dark:text-brand-cream-50/70">
-              Power International BD supplies deep-cycle and easy-bike
-              batteries built for long mileage, fast recharge, and dependable
-              backup power &mdash; trusted across Chuadanga, Jashore and Pabna.
+              {content.heroSubtitle}
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -70,22 +82,35 @@ export default function HeroSection() {
 
           {/* Right: hero image */}
           <div className="relative flex w-full items-center justify-center p-8 sm:p-12">
-            <Image
-              src="/hero.png"
-              alt="Power International BD battery"
-              width={480}
-              height={480}
-              priority
-              className="h-auto w-full max-w-sm dark:hidden"
-            />
-            <Image
-              src="/hero-dark.png"
-              alt="Power International BD battery"
-              width={480}
-              height={480}
-              priority
-              className="hidden h-auto w-full max-w-sm dark:block"
-            />
+            {isDefaultHeroImage ? (
+              <>
+                <Image
+                  src="/hero.png"
+                  alt="Power International BD battery"
+                  width={480}
+                  height={480}
+                  priority
+                  className="h-auto w-full max-w-sm dark:hidden"
+                />
+                <Image
+                  src="/hero-dark.png"
+                  alt="Power International BD battery"
+                  width={480}
+                  height={480}
+                  priority
+                  className="hidden h-auto w-full max-w-sm dark:block"
+                />
+              </>
+            ) : (
+              <Image
+                src={heroImage}
+                alt="Power International BD battery"
+                width={480}
+                height={480}
+                priority
+                className="h-auto w-full max-w-sm"
+              />
+            )}
           </div>
         </div>
 

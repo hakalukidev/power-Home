@@ -1,7 +1,10 @@
 // src/components/sections/AboutSection.tsx
 
+'use client';
+
 import Image from 'next/image';
 import { MapPin } from 'lucide-react';
+import { useLandingContent } from '@/hooks/useLandingContent';
 
 const depots = [
   { label: 'Office', value: 'Sadar, Chuadanga' },
@@ -10,6 +13,8 @@ const depots = [
 ];
 
 export function AboutSection() {
+  const { content } = useLandingContent();
+
   return (
     <section id="about" className="bg-brand-cream-50 py-20 dark:bg-brand-navy-950">
       <div className="container mx-auto px-4">
@@ -22,10 +27,7 @@ export function AboutSection() {
               A trusted battery manufacturer, built on Bangladeshi ground
             </h2>
             <p className="mt-5 max-w-lg leading-relaxed text-brand-navy-900/70 dark:text-brand-cream-50/70">
-              Power International BD engineers deep-cycle and easy-bike
-              batteries built to last &mdash; combining reinforced plate
-              design, rigorous quality checks, and a growing depot network to
-              keep riders and retailers powered across Bangladesh.
+              {content.aboutText}
             </p>
 
             <div className="mt-8 flex items-center gap-4 border-t border-brand-navy-950/10 pt-6 dark:border-white/10">

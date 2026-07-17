@@ -7,33 +7,11 @@ import { ShieldCheck, BadgeCheck, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { TextReveal } from '@/components/ui/text-reveal';
 import { ProductImageReveal } from './ProductImageReveal';
-
-const products = [
-  {
-    id: 1,
-    name: 'AK Power Plus',
-    specs: '6-EV-12V · Deep Cycle AGM',
-    description:
-      'Heavy-duty deep-cycle battery engineered for easy bikes and backup power, with reinforced plates for a longer, more consistent discharge cycle.',
-    price: 'Starting from ৳ 8,500',
-    guarantee: '12 Months Replacement Guarantee',
-    image: '/products/p1.jpeg',
-    badge: 'Best Seller',
-  },
-  {
-    id: 2,
-    name: 'Mileage King',
-    specs: 'Model 21S AH · 6-EV-12V · Easy Bike Battery',
-    description:
-      'High-mileage easy-bike battery built for long rides, fast recharge, and dependable power delivery mile after mile.',
-    price: 'Starting from ৳ 9,900',
-    guarantee: '18 Months Warranty',
-    image: '/products/p2.jpeg',
-    badge: 'Top Rated',
-  },
-];
+import { useLandingContent } from '@/hooks/useLandingContent';
 
 export default function ProductsSection() {
+  const { content } = useLandingContent();
+
   return (
     <section id="products" className="bg-white py-10 dark:bg-brand-navy-900">
       <div className="container mx-auto px-4">
@@ -42,7 +20,7 @@ export default function ProductsSection() {
         </TextReveal>
 
         <div className="flex flex-col gap-16">
-          {products.map((product, index) => {
+          {content.products.map((product, index) => {
             const imageFirst = index % 2 === 0;
             return (
               <div

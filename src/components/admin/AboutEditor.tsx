@@ -16,7 +16,7 @@ export function AboutEditor() {
       <h2 className="text-xl font-semibold">About Section</h2>
       <p className="mt-2 text-sm text-slate-400">Update the company description and story.</p>
 
-      {loading || !content ? (
+      {loading ? (
         <p className="mt-4 text-sm text-slate-500">Loading...</p>
       ) : (
         <AboutEditorForm content={content} save={save} />

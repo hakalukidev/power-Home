@@ -8,15 +8,15 @@ import { getLandingContent } from '@/lib/landing/content';
 import type { LandingContent } from '@/types/landing';
 
 export function useLandingContent() {
-  const [content, setContent] = useState<LandingContent | null>(null);
+  const [content, setContent] = useState<LandingContent>(() => getLandingContent());
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let active = true;
     fetchLandingContent()
       .then((remote) => {
-        if (!active) return;
-        setContent(remote ?? getLandingContent());
+        if (!active || !remote) return;
+        setContent(remote);
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -28,7 +28,7 @@ export function useLandingContent() {
 
   const save = useCallback(async (partial: Partial<LandingContent>) => {
     await saveLandingContent(partial);
-    setContent((prev) => (prev ? { ...prev, ...partial } : prev));
+    setContent((prev) => ({ ...prev, ...partial }));
   }, []);
 
   return { content, loading, save };

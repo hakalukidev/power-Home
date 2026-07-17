@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useLandingContent } from '@/hooks/useLandingContent';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import type { LandingContent } from '@/types/landing';
 
 export function ContactEditor() {
@@ -16,7 +17,7 @@ export function ContactEditor() {
       <h2 className="text-xl font-semibold">Contact Info</h2>
       <p className="mt-2 text-sm text-slate-400">Update contact details for the landing page.</p>
 
-      {loading || !content ? (
+      {loading ? (
         <p className="mt-4 text-sm text-slate-500">Loading...</p>
       ) : (
         <ContactEditorForm content={content} save={save} />
@@ -58,10 +59,11 @@ function ContactEditorForm({
         placeholder="Contact phone"
         className="bg-slate-900 text-slate-100"
       />
-      <Input
+      <Textarea
         value={contactAddress}
         onChange={(e) => setContactAddress(e.target.value)}
-        placeholder="Contact address"
+        placeholder={'Depots, one "Label: Value" per line\ne.g. Office: Sadar, Chuadanga'}
+        rows={3}
         className="bg-slate-900 text-slate-100"
       />
       <Button onClick={handleSave} disabled={status === 'saving'}>

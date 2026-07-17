@@ -3,28 +3,31 @@
 'use client';
 
 import { MapPin, Phone, Mail } from 'lucide-react';
-
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: 'Visit a Depot',
-    lines: ['Office: Sadar, Chuadanga', 'Depot 1: Monihar, Jashore', 'Depot 2: Isshordi, Pabna'],
-  },
-  {
-    icon: Phone,
-    title: 'Call Us',
-    lines: ['+880 1309 831 316'],
-    href: 'tel:+8801309831316',
-  },
-  {
-    icon: Mail,
-    title: 'Email Us',
-    lines: ['powerinternationalbd109@gmail.com'],
-    href: 'mailto:powerinternationalbd109@gmail.com',
-  },
-];
+import { useLandingContent } from '@/hooks/useLandingContent';
 
 export default function ContactSection() {
+  const { content } = useLandingContent();
+
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: 'Visit a Depot',
+      lines: (content.contactAddress ?? '').split('\n').filter(Boolean),
+    },
+    {
+      icon: Phone,
+      title: 'Call Us',
+      lines: content.contactPhone ? [content.contactPhone] : [],
+      href: content.contactPhone ? `tel:${content.contactPhone.replace(/\s+/g, '')}` : undefined,
+    },
+    {
+      icon: Mail,
+      title: 'Email Us',
+      lines: [content.contactEmail],
+      href: `mailto:${content.contactEmail}`,
+    },
+  ];
+
   return (
     <section id="contact" className="bg-brand-cream-50 py-20 dark:bg-brand-navy-950">
       <div className="container mx-auto px-4">
@@ -43,7 +46,7 @@ export default function ContactSection() {
         <div className="mx-auto grid max-w-3xl gap-10 divide-y divide-brand-navy-950/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 dark:divide-white/10">
           {contactInfo.map((item) => {
             const Icon = item.icon;
-            const content = (
+            const card = (
               <div className="flex flex-col items-center gap-3 pt-10 text-center first:pt-0 sm:px-6 sm:pt-0">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-brand-orange-500/30 text-brand-orange-500">
                   <Icon className="h-5 w-5" />
@@ -60,10 +63,10 @@ export default function ContactSection() {
             );
             return item.href ? (
               <a key={item.title} href={item.href} className="block">
-                {content}
+                {card}
               </a>
             ) : (
-              <div key={item.title}>{content}</div>
+              <div key={item.title}>{card}</div>
             );
           })}
         </div>

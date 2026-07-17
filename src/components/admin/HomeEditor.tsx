@@ -8,6 +8,7 @@ import { useLandingContent } from '@/hooks/useLandingContent';
 import { uploadHeroImage } from '@/lib/cloudinary/upload';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import type { LandingContent } from '@/types/landing';
 
 export function HomeEditor() {
@@ -18,7 +19,7 @@ export function HomeEditor() {
       <h2 className="text-xl font-semibold">Hero Content</h2>
       <p className="mt-2 text-sm text-slate-400">Edit the homepage hero title and subtitle here.</p>
 
-      {loading || !content ? (
+      {loading ? (
         <p className="mt-4 text-sm text-slate-500">Loading...</p>
       ) : (
         <HomeEditorForm content={content} save={save} />
@@ -60,10 +61,11 @@ function HomeEditorForm({
 
   return (
     <div className="mt-4 space-y-3">
-      <Input
+      <Textarea
         value={heroTitle}
         onChange={(e) => setHeroTitle(e.target.value)}
-        placeholder="Hero title"
+        placeholder={'Hero title—one line per typed phrase, last line is highlighted'}
+        rows={3}
         className="bg-slate-900 text-slate-100"
       />
       <Input
