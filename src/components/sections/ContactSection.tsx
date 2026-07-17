@@ -26,21 +26,21 @@ const contactInfo = [
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="bg-brand-cream-50 py-20">
+    <section id="contact" className="bg-brand-cream-50 py-20 dark:bg-brand-navy-950">
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="text-sm font-semibold tracking-wide text-brand-orange-500 uppercase">
             Get In Touch
           </p>
-          <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-brand-navy-950 sm:text-4xl">
+          <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-brand-navy-950 sm:text-4xl dark:text-white">
             Let&apos;s power your next order
           </h2>
-          <p className="mt-4 text-brand-navy-900/70">
+          <p className="mt-4 text-brand-navy-900/70 dark:text-brand-cream-50/70">
             Reach out for bulk orders, dealership enquiries, or product support.
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-3xl gap-10 divide-y divide-brand-navy-950/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <div className="mx-auto grid max-w-3xl gap-10 divide-y divide-brand-navy-950/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0 dark:divide-white/10">
           {contactInfo.map((item) => {
             const Icon = item.icon;
             const content = (
@@ -49,9 +49,9 @@ export default function ContactSection() {
                   <Icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="font-semibold text-brand-navy-950">{item.title}</p>
+                  <p className="font-semibold text-brand-navy-950 dark:text-white">{item.title}</p>
                   {item.lines.map((line) => (
-                    <p key={line} className="mt-1 text-sm text-brand-navy-900/70">
+                    <p key={line} className="mt-1 text-sm text-brand-navy-900/70 dark:text-brand-cream-50/70">
                       {line}
                     </p>
                   ))}

@@ -62,7 +62,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="bg-brand-cream-50 py-10">
+    <section id="features" className="bg-brand-cream-50 py-10 dark:bg-brand-navy-950">
       <div className="container mx-auto px-4">
         <TextReveal className="mx-auto mb-10 max-w-3xl">
           Why Choose Power International BD? Quality batteries backed by real service, from manufacturing to delivery.
@@ -73,7 +73,7 @@ export default function FeaturesSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="mx-auto grid max-w-5xl divide-y divide-brand-navy-950/10 border-t border-brand-navy-950/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0"
+          className="mx-auto grid max-w-5xl divide-y divide-brand-navy-950/10 border-t border-brand-navy-950/10 sm:grid-cols-2 sm:divide-x sm:divide-y-0 dark:divide-white/10 dark:border-white/10"
         >
           {features.map((feature, index) => {
             const Icon = feature.icon;
@@ -81,14 +81,14 @@ export default function FeaturesSection() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="flex items-start gap-4 border-b border-brand-navy-950/10 px-2 py-8 sm:border-b-0 sm:px-8"
+                className="flex items-start gap-4 border-b border-brand-navy-950/10 px-2 py-8 sm:border-b-0 sm:px-8 dark:border-white/10"
               >
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-brand-orange-500/30 text-brand-orange-500">
                   <Icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <h3 className="text-lg font-bold text-brand-navy-950">{feature.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-brand-navy-900/70">
+                  <h3 className="text-lg font-bold text-brand-navy-950 dark:text-white">{feature.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-brand-navy-900/70 dark:text-brand-cream-50/70">
                     {feature.description}
                   </p>
                 </div>

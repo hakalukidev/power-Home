@@ -35,7 +35,7 @@ const products = [
 
 export default function ProductsSection() {
   return (
-    <section id="products" className="bg-white py-10">
+    <section id="products" className="bg-white py-10 dark:bg-brand-navy-900">
       <div className="container mx-auto px-4">
         <TextReveal className="mx-auto mb-10 max-w-3xl">
           Batteries Built for the Long Ride. Scroll down to reveal each product — genuine Power International BD batteries, manufactured for reliability.
@@ -67,24 +67,24 @@ export default function ProductsSection() {
                   <p className="text-sm font-semibold tracking-wide text-brand-orange-500 uppercase">
                     {product.specs}
                   </p>
-                  <h3 className="mt-2 text-2xl font-extrabold text-brand-navy-950 sm:text-3xl">
+                  <h3 className="mt-2 text-2xl font-extrabold text-brand-navy-950 sm:text-3xl dark:text-white">
                     {product.name}
                   </h3>
-                  <p className="mt-4 max-w-lg leading-relaxed text-brand-navy-900/70">
+                  <p className="mt-4 max-w-lg leading-relaxed text-brand-navy-900/70 dark:text-brand-cream-50/70">
                     {product.description}
                   </p>
 
                   <div className="mt-6 flex flex-wrap items-center gap-6">
-                    <span className="text-2xl font-bold text-brand-navy-950">
+                    <span className="text-2xl font-bold text-brand-navy-950 dark:text-white">
                       {product.price}
                     </span>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-navy-900/70">
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-navy-900/70 dark:text-brand-cream-50/70">
                       <ShieldCheck className="h-4 w-4 text-brand-orange-500" />
                       {product.guarantee}
                     </span>
                   </div>
 
-                  <div className="mt-3 inline-flex items-center gap-1.5 text-xs text-brand-navy-900/50">
+                  <div className="mt-3 inline-flex items-center gap-1.5 text-xs text-brand-navy-900/50 dark:text-brand-cream-50/50">
                     <BadgeCheck className="h-3.5 w-3.5" />
                     Indicative pricing &mdash; contact us for the current rate.
                   </div>
@@ -108,7 +108,7 @@ export default function ProductsSection() {
           <Button
             variant="outline"
             size="lg"
-            className="rounded-full border-2 border-brand-navy-950 px-6 text-brand-navy-950 hover:bg-brand-navy-950 hover:text-white"
+            className="rounded-full border-2 border-brand-navy-950 px-6 text-brand-navy-950 hover:bg-brand-navy-950 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-brand-navy-950"
           >
             View All Products
           </Button>

@@ -14,7 +14,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative overflow-hidden bg-brand-cream-50 pt-28 pb-10 lg:pt-32">
+    <section id="home" className="relative overflow-hidden bg-brand-cream-50 pt-28 pb-10 lg:pt-32 dark:bg-brand-navy-950">
       {/* Background texture */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute top-0 right-0 h-96 w-96 rounded-full bg-brand-orange-500/10 blur-3xl" />
@@ -25,7 +25,7 @@ export default function HeroSection() {
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-6">
           {/* Left content */}
           <div>
-            <h1 className="text-4xl leading-[1.05] font-extrabold tracking-tight text-brand-navy-950 uppercase sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl leading-[1.05] font-extrabold tracking-tight text-brand-navy-950 uppercase sm:text-5xl lg:text-6xl dark:text-white">
               <TypingAnimation as="span" className="block" duration={55} delay={200} showCursor={false}>
                 Engineering
               </TypingAnimation>
@@ -43,7 +43,7 @@ export default function HeroSection() {
               </TypingAnimation>
             </h1>
 
-            <p className="mt-6 max-w-md text-base leading-relaxed text-brand-navy-900/70">
+            <p className="mt-6 max-w-md text-base leading-relaxed text-brand-navy-900/70 dark:text-brand-cream-50/70">
               Power International BD supplies deep-cycle and easy-bike
               batteries built for long mileage, fast recharge, and dependable
               backup power &mdash; trusted across Chuadanga, Jashore and Pabna.
@@ -62,7 +62,7 @@ export default function HeroSection() {
                 size="lg"
                 variant="outline"
                 onClick={() => scrollTo('#contact')}
-                className="h-11 rounded-full border-2 border-brand-navy-950 px-6 text-brand-navy-950 hover:bg-brand-navy-950 hover:text-white"
+                className="h-11 rounded-full border-2 border-brand-navy-950 px-6 text-brand-navy-950 hover:bg-brand-navy-950 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-brand-navy-950"
               >
                 Contact Us
               </Button>
@@ -85,7 +85,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="mt-14 flex items-center justify-center gap-2 text-xs font-medium text-brand-navy-900/60">
+        <div className="mt-14 flex items-center justify-center gap-2 text-xs font-medium text-brand-navy-900/60 dark:text-brand-cream-50/60">
           <ArrowDown className="h-3.5 w-3.5 animate-bounce" />
           Scroll to explore our products
         </div>

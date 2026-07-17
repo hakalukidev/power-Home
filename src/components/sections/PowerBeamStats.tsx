@@ -68,7 +68,7 @@ export default function PowerBeamStats() {
         ref={centerRef}
         className="absolute top-1/2 left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2"
       >
-        <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-brand-orange-500 bg-white p-3 shadow-lg sm:h-28 sm:w-28">
+        <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-brand-orange-500 bg-white p-3 sm:h-28 sm:w-28 dark:bg-brand-navy-900">
           <Image
             src="/brand/logo-icon.png"
             alt="Power International BD"
@@ -93,14 +93,14 @@ export default function PowerBeamStats() {
           >
             <div
               ref={nodeRefs[i]}
-              className="flex h-16 w-16 flex-col items-center justify-center rounded-full border border-brand-navy-950/10 bg-white shadow-md sm:h-20 sm:w-20"
+              className="flex h-16 w-16 flex-col items-center justify-center rounded-full border border-brand-navy-950/10 bg-white shadow-md sm:h-20 sm:w-20 dark:border-white/10 dark:bg-brand-navy-900"
             >
               <Icon className="h-4 w-4 text-brand-orange-500" />
-              <span className="text-sm font-bold text-brand-navy-950 sm:text-base">
+              <span className="text-sm font-bold text-brand-navy-950 sm:text-base dark:text-white">
                 {stat.value}
               </span>
             </div>
-            <span className="max-w-[6.5rem] text-center text-[11px] leading-tight font-medium text-brand-navy-900/70">
+            <span className="max-w-[6.5rem] text-center text-[11px] leading-tight font-medium text-brand-navy-900/70 dark:text-brand-cream-50/70">
               {stat.label}
             </span>
           </div>
