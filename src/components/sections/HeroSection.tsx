@@ -76,7 +76,15 @@ export default function HeroSection() {
               width={480}
               height={480}
               priority
-              className="h-auto w-full max-w-sm"
+              className="h-auto w-full max-w-sm dark:hidden"
+            />
+            <Image
+              src="/hero-dark.png"
+              alt="Power International BD battery"
+              width={480}
+              height={480}
+              priority
+              className="hidden h-auto w-full max-w-sm dark:block"
             />
           </div>
         </div>
