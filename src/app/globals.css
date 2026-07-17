@@ -196,3 +196,8 @@
     color: inherit;
   }
 }
+
+html.custom-cursor-active,
+html.custom-cursor-active * {
+  cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNgYGBgAAAABQABpfZFQAAAAABJRU5ErkJggg==') 8 8, none !important;
+}

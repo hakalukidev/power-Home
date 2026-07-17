@@ -22,13 +22,13 @@ export function CustomCursor() {
       el.style.opacity = '1';
     };
 
-    document.documentElement.style.cursor = 'none';
+    document.documentElement.classList.add('custom-cursor-active');
     window.addEventListener('mousemove', handleMove);
     document.documentElement.addEventListener('mouseleave', handleLeave);
     document.documentElement.addEventListener('mouseenter', handleEnter);
 
     return () => {
-      document.documentElement.style.cursor = '';
+      document.documentElement.classList.remove('custom-cursor-active');
       window.removeEventListener('mousemove', handleMove);
       document.documentElement.removeEventListener('mouseleave', handleLeave);
       document.documentElement.removeEventListener('mouseenter', handleEnter);
