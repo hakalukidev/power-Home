@@ -7,6 +7,8 @@ export type LandingProduct = {
   guarantee: string;
   badge: string;
   image: string;
+  /** ISO timestamp, set whenever the product is created or saved from the admin panel. */
+  updatedAt?: string;
 };
 
 export type LandingContent = {

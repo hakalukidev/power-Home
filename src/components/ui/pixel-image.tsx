@@ -9,6 +9,13 @@ type Grid = {
   cols: number
 }
 
+// Deterministic pseudo-random in [0, 1), seeded by index — keeps the fan-out
+// look of Math.random() without an impure call inside useMemo.
+function pseudoRandom(seed: number) {
+  const x = Math.sin(seed * 12.9898) * 43758.5453
+  return x - Math.floor(x)
+}
+
 const DEFAULT_GRIDS: Record<string, Grid> = {
   "6x4": { rows: 4, cols: 6 },
   "8x8": { rows: 8, cols: 8 },
@@ -92,7 +99,7 @@ export const PixelImage = ({
         ${col * (100 / cols)}% ${(row + 1) * (100 / rows)}%
       )`
 
-      const delay = Math.random() * maxAnimationDelay
+      const delay = pseudoRandom(index) * maxAnimationDelay
       return {
         clipPath,
         delay,

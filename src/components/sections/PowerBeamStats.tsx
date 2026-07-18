@@ -2,7 +2,7 @@
 
 'use client';
 
-import { createRef, useRef } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import { AnimatedBeam } from '@/components/ui/animated-beam';
 import {
@@ -39,7 +39,15 @@ const positions = [
 export default function PowerBeamStats() {
   const containerRef = useRef<HTMLDivElement>(null);
   const centerRef = useRef<HTMLDivElement>(null);
-  const nodeRefs = useRef(stats.map(() => createRef<HTMLDivElement>())).current;
+  // stats has a fixed length of 6 — one useRef per node, not a runtime-built array,
+  // so refs stay first-class hook calls instead of derived-during-render values.
+  const nodeRef0 = useRef<HTMLDivElement>(null);
+  const nodeRef1 = useRef<HTMLDivElement>(null);
+  const nodeRef2 = useRef<HTMLDivElement>(null);
+  const nodeRef3 = useRef<HTMLDivElement>(null);
+  const nodeRef4 = useRef<HTMLDivElement>(null);
+  const nodeRef5 = useRef<HTMLDivElement>(null);
+  const nodeRefs = [nodeRef0, nodeRef1, nodeRef2, nodeRef3, nodeRef4, nodeRef5];
 
   return (
     <div

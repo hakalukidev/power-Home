@@ -105,12 +105,17 @@ export function TypingAnimation({
     [words, children]
   )
 
-  useEffect(() => {
+  // Reset the animation when the source text changes. Adjusted during render
+  // (React's documented pattern for "state that resets on prop change")
+  // instead of an effect, which would setState after an extra commit.
+  const [prevSourceKey, setPrevSourceKey] = useState(animationSourceKey)
+  if (prevSourceKey !== animationSourceKey) {
+    setPrevSourceKey(animationSourceKey)
     setDisplayedText("")
     setCurrentWordIndex(0)
     setCurrentCharIndex(0)
     setPhase("typing")
-  }, [animationSourceKey])
+  }
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout> | null = null

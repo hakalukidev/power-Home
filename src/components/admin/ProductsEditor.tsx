@@ -2,159 +2,156 @@
 
 'use client';
 
-import { useState, type ChangeEvent } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
+import { Package, Star, ShieldCheck, ImageIcon, Pencil, ExternalLink, Trash2 } from 'lucide-react';
 import { useLandingContent } from '@/hooks/useLandingContent';
-import { uploadProductImage } from '@/lib/cloudinary/upload';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import type { LandingContent, LandingProduct } from '@/types/landing';
+import type { LandingProduct } from '@/types/landing';
+
+function formatUpdated(iso?: string) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
 
 export function ProductsEditor() {
   const { content, loading, save } = useLandingContent();
 
-  return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-950 p-6">
-      <h2 className="text-xl font-semibold">Products</h2>
-      <p className="mt-2 text-sm text-slate-400">Manage featured products from the admin screen.</p>
+  if (loading) {
+    return <p className="text-sm text-slate-500">Loading...</p>;
+  }
 
-      {loading ? (
-        <p className="mt-4 text-sm text-slate-500">Loading...</p>
-      ) : (
-        <ProductsEditorForm content={content} save={save} />
-      )}
-    </div>
-  );
-}
+  const products = content.products;
+  const stats = [
+    { label: 'Total products', value: products.length, icon: Package },
+    { label: 'Featured', value: products.filter((p) => p.badge.trim() !== '').length, icon: Star },
+    {
+      label: 'With guarantee',
+      value: products.filter((p) => p.guarantee.trim() !== '').length,
+      icon: ShieldCheck,
+    },
+    {
+      label: 'Images ready',
+      value: products.filter((p) => p.image.trim() !== '').length,
+      icon: ImageIcon,
+    },
+  ];
 
-function ProductsEditorForm({
-  content,
-  save,
-}: {
-  content: LandingContent;
-  save: (partial: Partial<LandingContent>) => Promise<void>;
-}) {
-  const [products, setProducts] = useState<LandingProduct[]>(content.products);
-  const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
-  const [status, setStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
-
-  const updateProduct = (index: number, patch: Partial<LandingProduct>) => {
-    setProducts((prev) => prev.map((p, i) => (i === index ? { ...p, ...patch } : p)));
-    setStatus('idle');
-  };
-
-  const addProduct = () => {
-    setProducts((prev) => [
-      ...prev,
-      {
-        id: crypto.randomUUID(),
-        name: '',
-        specs: '',
-        description: '',
-        price: '',
-        guarantee: '',
-        badge: '',
-        image: '',
-      },
-    ]);
-  };
-
-  const removeProduct = (index: number) => {
-    setProducts((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const handleImageChange = async (index: number, e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploadingIndex(index);
-    try {
-      const url = await uploadProductImage(file);
-      updateProduct(index, { image: url });
-    } finally {
-      setUploadingIndex(null);
-    }
-  };
-
-  const handleSave = async () => {
-    setStatus('saving');
-    await save({ products });
-    setStatus('saved');
+  const handleDelete = async (product: LandingProduct) => {
+    if (!window.confirm(`Remove "${product.name || 'this product'}"? This can't be undone.`)) return;
+    await save({ products: products.filter((p) => p.id !== product.id) });
   };
 
   return (
-    <div className="mt-4 space-y-4">
-      {products.map((product, index) => (
-        <div key={product.id} className="space-y-2 rounded-lg border border-slate-800 p-3">
-          <Input
-            value={product.name}
-            onChange={(e) => updateProduct(index, { name: e.target.value })}
-            placeholder="Product name"
-            className="bg-slate-900 text-slate-100"
-          />
-          <Input
-            value={product.specs}
-            onChange={(e) => updateProduct(index, { specs: e.target.value })}
-            placeholder="Specs (e.g. 6-EV-12V · Deep Cycle AGM)"
-            className="bg-slate-900 text-slate-100"
-          />
-          <Textarea
-            value={product.description}
-            onChange={(e) => updateProduct(index, { description: e.target.value })}
-            placeholder="Description"
-            rows={3}
-            className="bg-slate-900 text-slate-100"
-          />
-          <div className="grid grid-cols-2 gap-2">
-            <Input
-              value={product.price}
-              onChange={(e) => updateProduct(index, { price: e.target.value })}
-              placeholder="Price (e.g. Starting from ৳ 8,500)"
-              className="bg-slate-900 text-slate-100"
-            />
-            <Input
-              value={product.badge}
-              onChange={(e) => updateProduct(index, { badge: e.target.value })}
-              placeholder="Badge (e.g. Best Seller)"
-              className="bg-slate-900 text-slate-100"
-            />
-          </div>
-          <Input
-            value={product.guarantee}
-            onChange={(e) => updateProduct(index, { guarantee: e.target.value })}
-            placeholder="Guarantee (e.g. 12 Months Replacement Guarantee)"
-            className="bg-slate-900 text-slate-100"
-          />
-          {product.image && (
-            <Image
-              src={product.image}
-              alt={product.name || 'Product preview'}
-              width={160}
-              height={100}
-              className="rounded-md border border-slate-800 object-cover"
-            />
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => handleImageChange(index, e)}
-            disabled={uploadingIndex === index}
-            className="block w-full text-sm text-slate-400 file:mr-4 file:rounded-md file:border-0 file:bg-slate-800 file:px-3 file:py-2 file:text-slate-100"
-          />
-          {uploadingIndex === index && <p className="text-xs text-slate-500">Uploading...</p>}
-          <Button variant="outline" size="sm" onClick={() => removeProduct(index)}>
-            Remove
-          </Button>
-        </div>
-      ))}
+    <div className="space-y-6">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat) => {
+          const Icon = stat.icon;
+          return (
+            <div key={stat.label} className="rounded-2xl border border-slate-800 bg-slate-950 p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-slate-400">{stat.label}</span>
+                <Icon className="h-4 w-4 text-brand-orange-500" />
+              </div>
+              <p className="mt-2 text-2xl font-bold text-white">{stat.value}</p>
+            </div>
+          );
+        })}
+      </div>
 
-      <div className="flex gap-3">
-        <Button variant="outline" onClick={addProduct}>
-          Add product
-        </Button>
-        <Button onClick={handleSave} disabled={status === 'saving'}>
-          {status === 'saving' ? 'Saving...' : status === 'saved' ? 'Saved' : 'Save'}
-        </Button>
+      <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950">
+        <table className="w-full min-w-[820px] text-left text-sm">
+          <thead>
+            <tr className="border-b border-slate-800 text-xs font-semibold tracking-wide text-slate-400 uppercase">
+              <th className="px-4 py-3">Image</th>
+              <th className="px-4 py-3">Name</th>
+              <th className="px-4 py-3">Specs</th>
+              <th className="px-4 py-3">Price</th>
+              <th className="px-4 py-3">Status</th>
+              <th className="px-4 py-3">Updated</th>
+              <th className="px-4 py-3 text-right">Manage</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-800">
+            {products.map((product) => (
+              <tr key={product.id}>
+                <td className="px-4 py-3">
+                  <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-lg bg-slate-900">
+                    {product.image ? (
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        width={48}
+                        height={48}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <ImageIcon className="h-5 w-5 text-slate-600" />
+                    )}
+                  </div>
+                </td>
+                <td className="px-4 py-3">
+                  <p className="font-medium text-white">{product.name || 'Untitled product'}</p>
+                  <p className="mt-0.5 line-clamp-1 max-w-xs text-xs text-slate-400">
+                    {product.description}
+                  </p>
+                </td>
+                <td className="px-4 py-3 text-slate-300">{product.specs}</td>
+                <td className="px-4 py-3 text-slate-300">{product.price}</td>
+                <td className="px-4 py-3">
+                  {product.badge ? (
+                    <Badge variant="secondary">{product.badge}</Badge>
+                  ) : (
+                    <span className="text-slate-500">—</span>
+                  )}
+                </td>
+                <td className="px-4 py-3 text-slate-400">{formatUpdated(product.updatedAt)}</td>
+                <td className="px-4 py-3">
+                  <div className="flex justify-end gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      nativeButton={false}
+                      render={
+                        <Link href={`/admin/products/${product.id}/edit`}>
+                          <Pencil className="h-3.5 w-3.5" />
+                          Edit
+                        </Link>
+                      }
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      nativeButton={false}
+                      render={
+                        <Link href="/#products" target="_blank">
+                          <ExternalLink className="h-3.5 w-3.5" />
+                          View
+                        </Link>
+                      }
+                    />
+                    <Button variant="destructive" size="sm" onClick={() => handleDelete(product)}>
+                      <Trash2 className="h-3.5 w-3.5" />
+                      Delete
+                    </Button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+            {products.length === 0 && (
+              <tr>
+                <td colSpan={7} className="px-4 py-10 text-center text-sm text-slate-500">
+                  No products yet. Click &quot;Add Product&quot; to create one.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

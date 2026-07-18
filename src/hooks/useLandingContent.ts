@@ -16,7 +16,7 @@ export function useLandingContent() {
     fetchLandingContent()
       .then((remote) => {
         if (!active || !remote) return;
-        setContent(remote);
+        setContent((prev) => ({ ...prev, ...remote }));
       })
       .finally(() => {
         if (active) setLoading(false);

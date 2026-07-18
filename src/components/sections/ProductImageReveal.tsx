@@ -4,6 +4,7 @@
 
 import { useRef } from 'react';
 import { useInView } from 'motion/react';
+import { ImageOff } from 'lucide-react';
 import { PixelImage } from '@/components/ui/pixel-image';
 import { cn } from '@/lib/utils';
 
@@ -29,7 +30,12 @@ export function ProductImageReveal({
         className
       )}
     >
-      {hasPlayed ? (
+      {!src ? (
+        <div className="flex h-72 w-72 flex-col items-center justify-center gap-2 rounded-lg bg-brand-navy-950/5 text-brand-navy-900/40 sm:h-80 sm:w-80 dark:bg-white/5 dark:text-white/30">
+          <ImageOff className="h-10 w-10" />
+          <span className="text-xs font-medium">No image yet</span>
+        </div>
+      ) : hasPlayed ? (
         <PixelImage
           src={src}
           grid="6x4"
