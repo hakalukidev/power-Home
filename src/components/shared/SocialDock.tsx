@@ -3,6 +3,7 @@
 'use client';
 
 import { Dock, DockIcon } from '@/components/ui/dock';
+import { useMediaQuery } from '@/hooks/useCoarsePointer';
 import { cn } from '@/lib/utils';
 
 function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -47,15 +48,24 @@ const socials = [
 ];
 
 export function SocialDock({ className }: { className?: string }) {
+  // Magnification is mouse-hover driven; on touch devices it has no natural
+  // "leave" event, so a tap can leave icons stuck magnified. Disable it and
+  // shrink the resting size for touch devices AND narrow screens generally
+  // (a phone-sized viewport should get the compact dock even under an
+  // emulator that doesn't fully emulate a coarse pointer).
+  const isCompact = useMediaQuery('(pointer: coarse), (max-width: 640px)');
+
   return (
     <Dock
       className={cn(
         'fixed right-4 bottom-4 z-50 mt-0 h-[76px] border-black/10 bg-white/70 shadow-lg shadow-black/5 sm:right-6 sm:bottom-6',
+        isCompact && 'h-10',
         className
       )}
-      iconSize={52}
-      iconMagnification={72}
+      iconSize={isCompact ? 26 : 52}
+      iconMagnification={isCompact ? 26 : 72}
       iconDistance={120}
+      disableMagnification={isCompact}
     >
       {socials.map(({ name, href, Icon, color }) => (
         <DockIcon key={name} className="bg-brand-cream-50">

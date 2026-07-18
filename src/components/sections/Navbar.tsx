@@ -59,7 +59,15 @@ export default function Navbar() {
             width={1155}
             height={424}
             priority
-            className="h-9 w-auto"
+            className="h-9 w-auto dark:hidden"
+          />
+          <Image
+            src="/brand/logo-full-dark.png"
+            alt="Power International BD"
+            width={1155}
+            height={424}
+            priority
+            className="hidden h-9 w-auto dark:block"
           />
         </Link>
 
