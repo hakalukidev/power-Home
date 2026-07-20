@@ -3,7 +3,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/shared/ModeToggle';
@@ -53,21 +52,18 @@ export default function Navbar() {
           }}
           className="flex shrink-0 items-center"
         >
-          <Image
-            src="/brand/logo-full.png"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/logo-full.svg"
             alt="Power International BD"
-            width={1155}
-            height={424}
-            priority
-            className="h-9 w-auto dark:hidden"
+            className="h-14 w-auto dark:hidden"
           />
-          <Image
-            src="/brand/logo-full-dark.png"
+          {/* Dark-mode variant with the wordmark recolored white so it stays readable on the dark navbar */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/logo-full-dark.svg"
             alt="Power International BD"
-            width={1155}
-            height={424}
-            priority
-            className="hidden h-9 w-auto dark:block"
+            className="hidden h-14 w-auto dark:block"
           />
         </Link>
 

@@ -2,7 +2,6 @@
 
 'use client';
 
-import Image from 'next/image';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { useLandingContent } from '@/hooks/useLandingContent';
 
@@ -34,11 +33,10 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Image
-                src="/brand/logo-icon.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand/logo-icon.svg"
                 alt="Power International BD"
-                width={387}
-                height={428}
                 className="h-9 w-auto"
               />
               <span className="font-bold text-xl">

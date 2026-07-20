@@ -12,7 +12,7 @@ export function CustomCursor() {
     if (!el) return;
 
     const handleMove = (e: MouseEvent) => {
-      el.style.transform = `translate(${e.clientX}px, ${e.clientY}px) rotate(-45deg)`;
+      el.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
       el.style.opacity = '1';
     };
     const handleLeave = () => {
@@ -44,7 +44,7 @@ export function CustomCursor() {
     >
       <div
         className="h-5 w-5 bg-brand-orange-500 drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)]"
-        style={{ clipPath: 'polygon(0 0, 100% 32%, 32% 100%)' }}
+        style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 50%)', transform: 'rotate(45deg)' }}
       />
     </div>
   );

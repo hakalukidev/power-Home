@@ -5,6 +5,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Marquee } from '@/components/ui/marquee';
 import { Star, Quote } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const testimonials = [
   {
@@ -39,9 +40,15 @@ const testimonials = [
   },
 ];
 
-function TestimonialCard({ testimonial }: { testimonial: (typeof testimonials)[number] }) {
+function TestimonialCard({
+  testimonial,
+  className,
+}: {
+  testimonial: (typeof testimonials)[number];
+  className?: string;
+}) {
   return (
-    <Card className="h-full w-80 shrink-0">
+    <Card className={cn('h-full w-80 shrink-0', className)}>
       <CardContent className="p-6 flex flex-col h-full">
         <Quote className="h-8 w-8 text-brand-orange-500/30" />
         <p className="mt-4 text-brand-navy-900/80 dark:text-brand-cream-50/80 flex-1">{testimonial.quote}</p>
@@ -73,15 +80,29 @@ export default function TestimonialsSection() {
         </div>
 
         {testimonials.length > 4 ? (
-          <div className="relative -mx-4">
-            <Marquee pauseOnHover className="py-2">
+          <>
+            {/* Mobile: one full-width card per screen, swipeable with scroll-snap */}
+            <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 -mx-4 md:hidden">
               {testimonials.map((testimonial) => (
-                <TestimonialCard key={testimonial.name} testimonial={testimonial} />
+                <TestimonialCard
+                  key={testimonial.name}
+                  testimonial={testimonial}
+                  className="w-[calc(100vw-2rem)] shrink-0 snap-center"
+                />
               ))}
-            </Marquee>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-linear-to-r from-brand-cream-50 to-transparent sm:w-32 dark:from-brand-navy-950" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-linear-to-l from-brand-cream-50 to-transparent sm:w-32 dark:from-brand-navy-950" />
-          </div>
+            </div>
+
+            {/* Desktop/tablet: continuous auto-scrolling marquee */}
+            <div className="relative -mx-4 hidden md:block">
+              <Marquee pauseOnHover className="py-2">
+                {testimonials.map((testimonial) => (
+                  <TestimonialCard key={testimonial.name} testimonial={testimonial} />
+                ))}
+              </Marquee>
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-linear-to-r from-brand-cream-50 to-transparent sm:w-32 dark:from-brand-navy-950" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-linear-to-l from-brand-cream-50 to-transparent sm:w-32 dark:from-brand-navy-950" />
+            </div>
+          </>
         ) : (
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (

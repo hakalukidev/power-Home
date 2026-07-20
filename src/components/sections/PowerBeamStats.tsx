@@ -3,7 +3,6 @@
 'use client';
 
 import { useRef } from 'react';
-import Image from 'next/image';
 import { AnimatedBeam } from '@/components/ui/animated-beam';
 import {
   Building2,
@@ -77,11 +76,10 @@ export default function PowerBeamStats() {
         className="absolute top-1/2 left-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2"
       >
         <div className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-brand-orange-500 bg-white p-3 sm:h-28 sm:w-28 dark:bg-brand-navy-900">
-          <Image
-            src="/brand/logo-icon.png"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/logo-icon.svg"
             alt="Power International BD"
-            width={387}
-            height={428}
             className="h-full w-auto object-contain"
           />
         </div>

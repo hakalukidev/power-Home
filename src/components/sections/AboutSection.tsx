@@ -2,7 +2,6 @@
 
 'use client';
 
-import Image from 'next/image';
 import { MapPin } from 'lucide-react';
 import { useLandingContent } from '@/hooks/useLandingContent';
 
@@ -31,11 +30,10 @@ export function AboutSection() {
             </p>
 
             <div className="mt-8 flex items-center gap-4 border-t border-brand-navy-950/10 pt-6 dark:border-white/10">
-              <Image
-                src="/brand/logo-icon.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/brand/logo-icon.svg"
                 alt="Power International BD"
-                width={387}
-                height={428}
                 className="h-12 w-auto"
               />
               <div>
