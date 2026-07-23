@@ -6,7 +6,6 @@ import Navbar from '@/components/sections/Navbar';
 import { SocialDock } from '@/components/shared/SocialDock';
 import { CustomCursor } from '@/components/shared/CustomCursor';
 import HeroSection from '@/components/sections/HeroSection';
-import CoreOperationsSection from '@/components/sections/CoreOperationsSection';
 import EcosystemSection from '@/components/sections/EcosystemSection';
 import SolutionsSection from '@/components/sections/SolutionsSection';
 import FeaturesSection from '@/components/sections/FeaturesSection';
@@ -24,7 +23,6 @@ export default function HomePage() {
     <main>
       <Navbar />
       <HeroSection />
-      <CoreOperationsSection />
       <EcosystemSection />
       <SolutionsSection />
       <ProductsSection />
