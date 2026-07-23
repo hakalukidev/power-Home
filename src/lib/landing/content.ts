@@ -2,9 +2,11 @@ import type { LandingContent } from '@/types/landing';
 
 export function getLandingContent(): LandingContent {
   return {
-    heroTitle: 'Engineering\nBatteries That\nKeep You Moving',
+    heroTitle: 'Driving Energy\nInfrastructure,\nSustaining Industries',
     heroSubtitle:
-      'Power International BD supplies deep-cycle and easy-bike batteries built for long mileage, fast recharge, and dependable backup power — trusted across Chuadanga, Jashore and Pabna.',
+      'High-Performance Energy Solutions & Industrial Raw Materials across South Asia.',
+    heroDescription:
+      'Power International BD collaborates with top-tier Chinese manufacturing facilities in Bangladesh to produce premium-quality batteries under our own brand. As a trusted B2B partner, we import next-generation Lithium solutions, trade refined lead and battery scrap with local refineries, and engineer products built for future global export.',
     heroImageUrl: '/hero.png',
     products: [
       {
@@ -31,7 +33,7 @@ export function getLandingContent(): LandingContent {
       },
     ],
     aboutText:
-      'Power International BD engineers deep-cycle and easy-bike batteries built to last — combining reinforced plate design, rigorous quality checks, and a growing depot network to keep riders and retailers powered across Bangladesh.',
+      'At Power International BD, we operate an agile and asset-light business model designed for maximum efficiency. Instead of maintaining proprietary manufacturing plants, we partner with leading Chinese-managed factories operating in Bangladesh to enforce strict international standards on our product lines. Beyond battery branding, we are a key player in the circular energy economy — aggregating battery scrap for local lead refining factories, securing high-purity refined lead, and importing cutting-edge Lithium technologies to power the future.',
     contactEmail: 'powerinternationalbd109@gmail.com',
     contactPhone: '+880 1309 831 316',
     contactAddress: 'Office: Sadar, Chuadanga\nDepot 1: Monihar, Jashore\nDepot 2: Isshordi, Pabna',

@@ -23,7 +23,7 @@ export function AboutSection() {
               About Us
             </p>
             <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-brand-navy-950 sm:text-4xl dark:text-white">
-              A trusted battery manufacturer, built on Bangladeshi ground
+              An agile, asset-light energy partner built for Bangladesh
             </h2>
             <p className="mt-5 max-w-lg leading-relaxed text-brand-navy-900/70 dark:text-brand-cream-50/70">
               {content.aboutText}

@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowDown } from 'lucide-react';
 import { TypingAnimation } from '@/components/ui/typing-animation';
 import { useLandingContent } from '@/hooks/useLandingContent';
+import { EnergyChainVisual } from './EnergyChainVisual';
 
 const TYPE_DURATION = 55;
 const LINE_PAUSE = 200;
@@ -56,8 +57,12 @@ export default function HeroSection() {
               ))}
             </h1>
 
-            <p className="mt-6 max-w-md text-base leading-relaxed text-brand-navy-900/70 dark:text-brand-cream-50/70">
+            <p className="mt-6 max-w-md text-lg font-semibold text-brand-navy-900/90 dark:text-brand-cream-50/90">
               {content.heroSubtitle}
+            </p>
+
+            <p className="mt-4 max-w-lg text-base leading-relaxed text-brand-navy-900/70 dark:text-brand-cream-50/70">
+              {content.heroDescription}
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -66,7 +71,7 @@ export default function HeroSection() {
                 onClick={() => scrollTo('#products')}
                 className="h-11 rounded-full bg-brand-orange-500 px-6 text-white hover:bg-brand-orange-600"
               >
-                Get Started
+                Explore Solutions
                 <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
               <Button
@@ -75,7 +80,7 @@ export default function HeroSection() {
                 onClick={() => scrollTo('#contact')}
                 className="h-11 rounded-full border-2 border-brand-navy-950 px-6 text-brand-navy-950 hover:bg-brand-navy-950 hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-brand-navy-950"
               >
-                Contact Us
+                B2B Inquiry
               </Button>
             </div>
           </div>
@@ -83,24 +88,7 @@ export default function HeroSection() {
           {/* Right: hero image */}
           <div className="relative flex w-full items-center justify-center p-8 sm:p-12">
             {isDefaultHeroImage ? (
-              <>
-                <Image
-                  src="/hero.png"
-                  alt="Power International BD battery"
-                  width={480}
-                  height={480}
-                  priority
-                  className="h-auto w-full max-w-sm dark:hidden"
-                />
-                <Image
-                  src="/hero-dark.png"
-                  alt="Power International BD battery"
-                  width={480}
-                  height={480}
-                  priority
-                  className="hidden h-auto w-full max-w-sm dark:block"
-                />
-              </>
+              <EnergyChainVisual />
             ) : (
               <Image
                 src={heroImage}

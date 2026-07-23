@@ -15,6 +15,7 @@ export type LandingContent = {
   /** Newline-separated phrases; the last line is highlighted in the hero heading. */
   heroTitle: string;
   heroSubtitle: string;
+  heroDescription?: string;
   heroImageUrl?: string;
   products: LandingProduct[];
   aboutText: string;
